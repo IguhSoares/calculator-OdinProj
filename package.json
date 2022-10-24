@@ -1,0 +1,24 @@
+{
+  "name": "calculator",
+  "version": "1.0.0",
+  "description": "Calculator app as part of The Odin Project's Foundations Course",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:silent": "jest --watchAll --silent --noStackTrace"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IguhSoares/calculator-OdinProj.git"
+  },
+  "keywords": [],
+  "author": "Igor Menezes Soares",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IguhSoares/calculator-OdinProj/issues"
+  },
+  "homepage": "https://github.com/IguhSoares/calculator-OdinProj#readme",
+  "devDependencies": {
+    "jest": "^29.2.2"
+  }
+}
