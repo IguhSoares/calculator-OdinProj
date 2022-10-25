@@ -48,5 +48,5 @@ const buffer = {
   },
 };
 
-export default buffer; /** ES6 export */
-// module.exports = { buffer }; /** Node export, used to run jest tests */
+// export default buffer; /** ES6 export */
+module.exports = { buffer }; /** Node export, used to run jest tests */
