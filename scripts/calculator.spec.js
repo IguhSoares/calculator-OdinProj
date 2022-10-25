@@ -96,10 +96,17 @@ describe('calculate method', () => {
     expect(calculate('3')).toBe(12);
   });
 
-  it('should calculate and save the result on the buffer', () => {
+  it('should calculate and save the result to the buffer', () => {
     buffer.num = -23.72;
     buffer.operator = '/';
-    calculate('9.75');
+    calculate('9.75', '+');
     expect(buffer.num).toBe(-2.432820512820513);
+  });
+
+  it('should calculate and save the next operator to the buffer', () => {
+    buffer.num = -23.72;
+    buffer.operator = '/';
+    calculate('9.75', '+');
+    expect(buffer.operator).toBe('+');
   });
 });

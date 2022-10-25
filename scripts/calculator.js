@@ -22,10 +22,15 @@ const addToBuffer = (value, type = 'number') => {
   else if (type === 'operator') buffer.operator = value;
 };
 
-const calculate = value => {
+/** if an operator is passed, the result is saved to the buffer
+ * along with the operator for the next operation */
+const calculate = (value, operator = null) => {
   const result = buffer.calc(Number(value));
   buffer.clear();
-  buffer.num = result;
+  if (operator) {
+    buffer.num = result;
+    buffer.operator = operator;
+  }
 
   return result;
 };
