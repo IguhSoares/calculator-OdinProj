@@ -1,6 +1,6 @@
 const buffer = {
   num: null,
-  operand: null,
+  operator: null,
   calc(x) {
     const operations = {
       '+': n => this.num + n,
@@ -9,7 +9,7 @@ const buffer = {
       '/': n => this.num / n,
     };
 
-    return operations[this.operand](x);
+    return operations[this.operator](x);
   },
 };
 
