@@ -1,4 +1,4 @@
-const buffer = require('./calculator').buffer;
+const { buffer } = require('./buffer');
 
 describe('Buffer object', () => {
   it('should contains these properties', () => {
