@@ -1,7 +1,5 @@
 const buffer = require('./calculator').buffer;
 
-console.log(buffer);
-
 describe('Buffer object', () => {
   it('should contains these properties', () => {
     expect(buffer).toHaveProperty('num');
@@ -25,7 +23,7 @@ describe('Buffer object', () => {
     it('should return a number', () => {
       buffer.num = 5;
       buffer.operand = '+';
-      expect(buffer.calc(3)).toBeInstanceOf(Number);
+      expect(typeof buffer.calc(3)).toBe('number');
     });
 
     it('should perform sum operation', () => {
@@ -46,7 +44,7 @@ describe('Buffer object', () => {
     it('should perform division operation', () => {
       buffer.num = 5;
       buffer.operand = '/';
-      expect(buffer.calc(3)).toBe(1.666666666666667);
+      expect(buffer.calc(3)).toBe(1.6666666666666667);
 
       buffer.num = 9;
       expect(buffer.calc(3)).toBe(3);
