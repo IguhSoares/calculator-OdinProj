@@ -11,7 +11,8 @@ body {
 #calculator {
   display: flex;
   flex-direction: column;
-  width: 12rem;
+  min-width: 12rem;
+  width: fit-content;
   margin: 2rem auto;
   border: 2px solid darkslateblue;
   border-radius: 5px;
