@@ -1,27 +1,38 @@
 import msg from './messages.js';
 import { calculate, writeToDisplay, getNumber } from './calculator.js';
+import Buffer from './buffer.js';
 
 const display = document.getElementById('display');
 
 const isOperator = val => ['+', '-', '×', '÷'].includes(val);
 
 const printToDisplay = val => {
-  if (display.innerText.length >= 20) throw 'Max limit reached';
+  const displayText = display.innerText;
+  if (displayText.length >= 20) throw 'Max limit reached';
   const itIsOperator = isOperator(val);
-  if (!itIsOperator || (itIsOperator && val === '-')) display.innerText += val;
+  if (
+    !itIsOperator ||
+    (displayText === '' && val === '-') ||
+    /\d+$/.test(displayText)
+  ) {
+    display.innerText += val;
+  }
 };
 
-const updateOperator = val => {
-  const displayText = display.innerText;
+const getOperator = value => {
   const oprt = {
     '+': '+',
     '-': '-',
     '*': '×',
     '/': '÷',
   };
-  console.log(isOperator(displayText.at(-1)));
+  return oprt[value];
+};
+
+const updateOperator = val => {
+  const displayText = display.innerText;
   if (isOperator(displayText.at(-1))) {
-    display.innerText = displayText.slice(0, -1) + oprt[val];
+    display.innerText = displayText.slice(0, -1) + getOperator(val);
   }
 };
 
@@ -78,9 +89,17 @@ const initOperators = () => {
   document.querySelectorAll('#operators .key').forEach(k => {
     k.addEventListener('click', e => {
       const displayText = display.innerText;
-      console.log(displayText);
-      const operator = e.target.getAttribute('value');
-      if (isOperator(displayText.at(-1))) updateOperator(operator);
+      const oprt = e.target.getAttribute('value');
+      if (isOperator(displayText.at(-1))) updateOperator(oprt);
+      else if (displayText === '' && oprt === '-') printToDisplay(oprt);
+      else {
+        const match = displayText.match(/^(\-?\d+$|\d+\.?\d+$)/);
+        if (match) {
+          Buffer.add(match[0]);
+          Buffer.add(oprt);
+          printToDisplay(getOperator(oprt));
+        }
+      }
     });
   });
 };
