@@ -10,7 +10,8 @@ Object.freeze(SECOND_NUM_REGEX);
 const getNumber = (display, position = 'first') => {
   const regex = position === 'first' ? FIRST_NUM_REGEX : SECOND_NUM_REGEX;
   const value = display.innerText;
-  return value.match(regex)[1];
+  const match = value.match(regex);
+  return match ? match[1] : null;
 };
 
 const writeToDisplay = (display, result, op = null) => {
@@ -35,9 +36,12 @@ const calculate = (value, operator = null) => {
   return result;
 };
 
+// export { calculate, addToBuffer, writeToDisplay, getNumber };
+
 module.exports = {
   getNumber,
   writeToDisplay,
   addToBuffer,
   calculate,
+  FIRST_NUM_REGEX,
 };
