@@ -1,5 +1,4 @@
-// import buffer from './buffer.js';
-const { buffer } = require('./buffer');
+import buffer from './buffer.js';
 
 const FIRST_NUM_REGEX = /^(\-?\d+\.?\d+)[+|\-|÷|×]$/;
 /** second number can never be negative, as the interface should not allow it */
@@ -36,12 +35,4 @@ const calculate = (value, operator = null) => {
   return result;
 };
 
-// export { calculate, addToBuffer, writeToDisplay, getNumber };
-
-module.exports = {
-  getNumber,
-  writeToDisplay,
-  addToBuffer,
-  calculate,
-  FIRST_NUM_REGEX,
-};
+export { calculate, addToBuffer, writeToDisplay, getNumber };

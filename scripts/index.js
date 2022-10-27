@@ -1,12 +1,6 @@
-// import {
-//   calculate,
-//   addToBuffer,
-//   writeToDisplay,
-//   getNumber,
-// } from './calculator';
-const { calculate, writeToDisplay, getNumber } = require('./calculator');
+import { calculate, writeToDisplay, getNumber } from './calculator';
 
-// const display = document.getElementById('display');
+const display = document.getElementById('display');
 
 const isOperator = val => ['+', '-', '*', '/'].includes(val);
 
@@ -47,12 +41,4 @@ const equalsTo = () => {
       writeToDisplay(display, result);
     }
   }
-};
-
-module.exports = {
-  printToDisplay,
-  updateOperator,
-  backspace,
-  addPoint,
-  equalsTo,
 };
