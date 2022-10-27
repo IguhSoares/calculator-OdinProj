@@ -13,7 +13,7 @@ const getNumber = (display, position = 'first') => {
   return match ? match[1] : null;
 };
 
-const writeToDisplay = (display, result, op = null) => {
+const printResult = (display, result, op = null) => {
   display.innerText = result + (op ? op : '');
 };
 
@@ -30,4 +30,4 @@ const calculate = (value, operator = null) => {
   return result;
 };
 
-export { calculate, writeToDisplay, getNumber };
+export { calculate, printResult, getNumber };
