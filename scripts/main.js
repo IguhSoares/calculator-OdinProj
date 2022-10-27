@@ -7,7 +7,7 @@ Object.freeze(display);
 
 const isOperator = val => /[+\-×÷]/.test(val);
 
-const clearDisplay = () => (display.innerText = '');
+const clearDisplay = () => (display.innerText = '0');
 
 const printToDisplay = val => {
   const displayText = display.innerText;
@@ -118,12 +118,37 @@ const initEqualsKey = () => {
   document.getElementById('equal-sign').addEventListener('click', equalsTo);
 };
 
+const initKeyboardSupport = () => {
+  const triggerClick = val => {
+    document
+      .querySelector(`.key[value="${val}"]`)
+      .dispatchEvent(new Event('click'));
+  };
+
+  const isValidKey = k => /^([0-9-+*\/\.=\s]|Backspace)$/.test(k);
+
+  document.querySelector('#keypad').addEventListener('keydown', e => {
+    if (isValidKey(e.key)) {
+      e.preventDefault();
+
+      if (e.key === ' ' || e.key === '=') {
+        triggerClick('=');
+      } else if (e.key === 'Backspace') {
+        triggerClick('bksp');
+      } else {
+        triggerClick(e.key);
+      }
+    }
+  });
+};
+
 const start = () => {
   initNumericKeys();
   initBackspace();
   initPointKey();
   initOperators();
   initEqualsKey();
+  initKeyboardSupport();
 };
 
 start();
