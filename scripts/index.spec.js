@@ -1,10 +1,3 @@
-/**
- * renderOnDisplay
- * updateOperator
- * backspace
- * addPoint
- * equalsTo
- */
 const { buffer } = require('./buffer');
 
 const {
