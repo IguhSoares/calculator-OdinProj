@@ -13,9 +13,7 @@ const getNumber = (display, position = 'first') => {
   return match ? match[1] : null;
 };
 
-const printResult = (display, result, op = null) => {
-  display.innerText = result + (op ? op : '');
-};
+const parseResult = (result, op = null) => result + (op ? op : '');
 
 /** if an operator is passed, the result is saved to the buffer
  * along with the operator for the next operation */
@@ -30,4 +28,4 @@ const calculate = (value, operator = null) => {
   return result;
 };
 
-export { calculate, printResult, getNumber };
+export { calculate, parseResult, getNumber };
