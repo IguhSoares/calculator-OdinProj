@@ -30,7 +30,7 @@ const backspace = () => {
 
 const addPoint = () => {
   const displayText = display.innerText;
-  let regex = /^\d+\.\d*[+|\-|×|÷]?(\d+\.\d+)?$/;
+  let regex = /^\d+\.\d*[+|\-|×|÷]?(\d+\.\d*)?$/;
   if (!regex.test(displayText)) {
     regex = /^.+[+|\-|×|÷]$/;
     display.innerText +=

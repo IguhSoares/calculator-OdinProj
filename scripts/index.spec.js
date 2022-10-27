@@ -88,6 +88,14 @@ describe('addPoint', () => {
     display.innerText = '3.7+4.53';
     addPoint();
     expect(display.innerText).toBe('3.7+4.53');
+
+    display.innerText = '3.7+453';
+    addPoint();
+    addPoint();
+    addPoint();
+    addPoint();
+    addPoint();
+    expect(display.innerText).toBe('3.7+453.');
   });
 
   it("should add a leading zero if there's no number preceding the point", () => {
