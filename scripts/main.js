@@ -123,6 +123,12 @@ const initEqualsKey = () => {
   document.getElementById('equal-sign').addEventListener('click', equalsTo);
 };
 
+const initClearKey = () => {
+  document
+    .querySelector('.key[value="Delete"]')
+    .addEventListener('click', clearDisplay);
+};
+
 const initKeyboardSupport = () => {
   const triggerClick = val => {
     document
@@ -130,7 +136,7 @@ const initKeyboardSupport = () => {
       .dispatchEvent(new Event('click'));
   };
 
-  const isValidKey = k => /^([0-9-+*\/\.=\s]|Backspace)$/.test(k);
+  const isValidKey = k => /^([0-9-+*\/\.=\s]|Backspace|Delete)$/.test(k);
 
   document.querySelector('#keypad').addEventListener('keydown', e => {
     if (isValidKey(e.key)) {
@@ -153,6 +159,7 @@ const start = () => {
   initPointKey();
   initOperators();
   initEqualsKey();
+  initClearKey();
   initKeyboardSupport();
 };
 
