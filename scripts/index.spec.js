@@ -5,15 +5,9 @@
  * addPoint
  * equalsTo
  */
-const {
-  getNumber,
-  writeToDisplay,
-  addToBuffer,
-  calculate,
-} = require('./calculator');
+const { buffer } = require('./buffer');
 
 const {
-  initNumericKeys,
   printToDisplay,
   updateOperator,
   backspace,
@@ -21,56 +15,8 @@ const {
   equalsTo,
 } = require('./index');
 
-document.body.innerHTML = `
-<div id="msg-area"></div>
-<div id="calculator">
-          <p id="display">9×9</p>
-          <div id="keypad">
-            <div id="numeric">
-              <span class="key" value="1">1</span>
-              <span class="key" value="2">2</span>
-              <span class="key" value="3">3</span>
-              <span class="key" value="4">4</span>
-              <span class="key" value="5">5</span>
-              <span class="key" value="6">6</span>
-              <span class="key" value="7">7</span>
-              <span class="key" value="8">8</span>
-              <span class="key" value="9">9</span>
-              <span class="key" value="0">0</span>
-              <span class="key point" value=".">.</span>
-            </div>
-            <div id="operators">
-              <span class="key" value="+">+</span>
-              <span class="key" value="-">-</span>
-              <span class="key" value="*">×</span>
-              <span class="key" value="/">÷</span>
-            </div>
-            <div id="options">
-              <span class="key" value="bksp">↩</span>
-              <span id="equal-sign" class="key" value="=">=</span>
-            </div>
-          </div>
-        </div>
-`;
+document.body.innerHTML = `<p id="display">9×9</p>`;
 const display = document.getElementById('display');
-
-describe('initNumericKeys', () => {
-  initNumericKeys();
-  const key = document.querySelector('.key[value="3"]');
-
-  it('should trigger printToDisplay() by clicking .key element', () => {
-    key.click();
-    key.click();
-    expect(printToDisplay).toBeCalledTimes(2);
-  });
-
-  it("should render a message when display's max limit is reached", () => {
-    const msgArea = document.getElementById('msg-area');
-    display.innerText = '99999999999999999999';
-    key.click();
-    expect(msgArea.innerText).toBe('Max limit reached');
-  });
-});
 
 describe('printToDisplay', () => {
   it('should print to the display, appending to what is already being displayed', () => {
@@ -165,6 +111,8 @@ describe('addPoint', () => {
 describe('equalsTo', () => {
   it('should calculate and print the result to the display', () => {
     display.innerText = '3.7×4.3';
+    buffer.num = 3.7;
+    buffer.operator = '*';
     equalsTo();
     expect(display.innerText).toBe('15.91');
   });
