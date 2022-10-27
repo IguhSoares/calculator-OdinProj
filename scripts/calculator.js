@@ -30,4 +30,4 @@ const calculate = (value, operator = null) => {
   return result;
 };
 
-export { calculate, addToBuffer, writeToDisplay, getNumber };
+export { calculate, writeToDisplay, getNumber };
