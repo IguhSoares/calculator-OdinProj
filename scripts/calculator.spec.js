@@ -34,6 +34,14 @@ describe('getNumber method', () => {
     expect(getNumber(display)).toBe('127');
   });
 
+  it('should return null if no first number', () => {
+    display.innerText = '';
+    expect(getNumber(display)).toBe(null);
+
+    display.innerText = '-';
+    expect(getNumber(display)).toBe(null);
+  });
+
   it('should get second number from display (division)', () => {
     const display = document.getElementById('display');
     display.innerText = '14.7÷3.42';
@@ -53,6 +61,11 @@ describe('getNumber method', () => {
   it('should get second number from display (subtraction)', () => {
     display.innerText = '127-15';
     expect(getNumber(display, 'second')).toBe('15');
+  });
+
+  it('should return null if no second number', () => {
+    display.innerText = '127-';
+    expect(getNumber(display, 'second')).toBe(null);
   });
 });
 
