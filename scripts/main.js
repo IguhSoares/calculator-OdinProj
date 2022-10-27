@@ -99,15 +99,20 @@ const initOperators = () => {
     k.addEventListener('click', e => {
       const displayText = display.innerText;
       const oprt = e.target.getAttribute('value');
+
       if (isOperator(displayText.at(-1))) updateOperator(oprt);
       else if (displayText === '0' && oprt === '-') {
         printToDisplay(oprt);
       } else if (displayText !== '0') {
         const match = displayText.match(/^(\-?\d+(?:\.\d+)?)$/);
         if (match) {
-          Buffer.add(match[0]);
-          Buffer.add(oprt);
-          printToDisplay(getOperator(oprt));
+          try {
+            Buffer.add(match[0]);
+            Buffer.add(oprt);
+            printToDisplay(getOperator(oprt));
+          } catch (error) {
+            msg.display(error);
+          }
         }
       }
     });
