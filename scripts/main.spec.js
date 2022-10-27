@@ -6,7 +6,7 @@ const {
   backspace,
   addPoint,
   equalsTo,
-} = require('./index');
+} = require('./main');
 
 document.body.innerHTML = `<p id="display">9×9</p>`;
 const display = document.getElementById('display');
