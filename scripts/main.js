@@ -1,3 +1,4 @@
+import msg from './messages.js';
 import { calculate, writeToDisplay, getNumber } from './calculator.js';
 
 const display = document.getElementById('display');
@@ -42,3 +43,33 @@ const equalsTo = () => {
     }
   }
 };
+
+const initNumericKeys = () => {
+  document.querySelectorAll('#numeric .key:not(.point)').forEach(k => {
+    k.addEventListener('click', e => {
+      try {
+        printToDisplay(e.target.getAttribute('value'));
+      } catch (err) {
+        msg.display(err);
+      }
+    });
+  });
+};
+
+const initBackspace = () => {
+  document
+    .querySelector('.key[value="bksp"]')
+    .addEventListener('click', backspace);
+};
+
+const initPointKey = () => {
+  document.querySelector('.point').addEventListener('click', addPoint);
+};
+
+const start = () => {
+  initNumericKeys();
+  initBackspace();
+  initPointKey();
+};
+
+start();
