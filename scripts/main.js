@@ -4,7 +4,7 @@ import Buffer from './buffer.js';
 
 const display = document.getElementById('display');
 
-const isOperator = val => ['+', '-', '×', '÷'].includes(val);
+const isOperator = val => /[+\-×÷]/.test(val);
 
 const clearDisplay = () => (display.innerText = '');
 
