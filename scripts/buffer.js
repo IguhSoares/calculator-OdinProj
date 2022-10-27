@@ -6,10 +6,10 @@ const Buffer = (function () {
   return {
     calc(x) {
       const operations = {
-        '+': n => num + n,
-        '-': n => num - n,
-        '*': n => num * n,
-        '/': n => num / n,
+        '+': n => this.num + n,
+        '-': n => this.num - n,
+        '*': n => this.num * n,
+        '/': n => this.num / n,
       };
 
       if (op === '/' && x === 0) throw new Error('Division by zero attempt');
@@ -29,7 +29,6 @@ const Buffer = (function () {
       if (n !== null && typeof n !== 'number')
         throw new TypeError('Not a number');
       number = n;
-      console.log('num: ', this.num);
     },
     get operator() {
       return op;
@@ -43,7 +42,6 @@ const Buffer = (function () {
         throw new ReferenceError(`Invalid operator: ${oprt}`);
 
       op = oprt;
-      console.log('ope: ', this.operator);
     },
     clear() {
       this.operator = null;
