@@ -59,9 +59,13 @@ const equalsTo = () => {
   else {
     const secondNum = getNumber(display, 'second');
     if (secondNum) {
-      const result = calculate(secondNum);
-      clearDisplay();
-      printToDisplay(parseResult(result));
+      try {
+        const result = calculate(secondNum);
+        clearDisplay();
+        printToDisplay(parseResult(result));
+      } catch (error) {
+        msg.display(error);
+      }
     }
   }
 };
