@@ -1,51 +1,59 @@
-const buffer = {
-  number: null,
-  op: null,
-  calc(x) {
-    const operations = {
-      '+': n => this.num + n,
-      '-': n => this.num - n,
-      '*': n => this.num * n,
-      '/': n => this.num / n,
-    };
-    const isFloat = n => n % 1 !== 0;
+const Buffer = (function () {
+  let number = null;
+  let op = null;
 
-    if (this.operator === '/' && x === 0)
-      throw new Error('Division by zero attempt');
+  const isFloat = n => n % 1 !== 0;
+  return {
+    calc(x) {
+      const operations = {
+        '+': n => num + n,
+        '-': n => num - n,
+        '*': n => num * n,
+        '/': n => num / n,
+      };
 
-    let result = operations[this.operator](x);
-    if (isFloat(result)) {
-      result = parseFloat(result.toFixed(15));
-    }
-    return result;
-  },
-  get num() {
-    return this.number;
-  },
-  set num(n) {
-    if (n === undefined)
-      throw new TypeError('Number cannot be set to undefined');
-    if (n !== null && typeof n !== 'number')
-      throw new TypeError('Not a number');
-    this.number = n;
-  },
-  get operator() {
-    return this.op;
-  },
-  set operator(oprt) {
-    if (this.number === null)
-      throw new Error('Unable to set operator: no number in buffer');
+      if (op === '/' && x === 0) throw new Error('Division by zero attempt');
 
-    const valid = { '+': 1, '-': 1, '*': 1, '/': 1, null: 1 };
-    if (valid[oprt] === undefined)
-      throw new ReferenceError(`Invalid operator: ${oprt}`);
+      let result = operations[op](x);
+      if (isFloat(result)) {
+        result = parseFloat(result.toFixed(15));
+      }
+      return result;
+    },
+    get num() {
+      return number;
+    },
+    set num(n) {
+      if (n === undefined)
+        throw new TypeError('Number cannot be set to undefined');
+      if (n !== null && typeof n !== 'number')
+        throw new TypeError('Not a number');
+      number = n;
+      console.log('num: ', this.num);
+    },
+    get operator() {
+      return op;
+    },
+    set operator(oprt) {
+      if (number === null)
+        throw new Error('Unable to set operator: no number in buffer');
 
-    this.op = oprt;
-  },
-  clear() {
-    this.operator = null;
-    this.num = null;
-  },
-};
+      const valid = { '+': 1, '-': 1, '*': 1, '/': 1, null: 1 };
+      if (valid[oprt] === undefined)
+        throw new ReferenceError(`Invalid operator: ${oprt}`);
 
-export default buffer; /** ES6 export */
+      op = oprt;
+      console.log('ope: ', this.operator);
+    },
+    clear() {
+      this.operator = null;
+      this.num = null;
+    },
+    add(value) {
+      if (!isNaN(Number(value))) this.num = Number(value);
+      else if (['+', '-', '*', '/'].includes(value)) this.operator = value;
+    },
+  };
+})();
+
+export default Buffer; /** ES6 export */
