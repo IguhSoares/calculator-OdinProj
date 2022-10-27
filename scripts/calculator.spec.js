@@ -95,7 +95,7 @@ describe('calculate method', () => {
     Buffer.num = -23.72;
     Buffer.operator = '/';
     calculate('9.75', '+');
-    expect(Buffer.num).toBe(-2.432820512820513);
+    expect(Buffer.num).toBe(-2.43282051282051);
   });
 
   it('should calculate and save the next operator to the buffer', () => {

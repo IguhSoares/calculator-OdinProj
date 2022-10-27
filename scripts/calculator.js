@@ -1,9 +1,8 @@
-// import buffer from './buffer.js';
 const { Buffer } = require('./buffer');
 
-const FIRST_NUM_REGEX = /^(\-?\d+\.?\d+)[+|\-|÷|×]$/;
+const FIRST_NUM_REGEX = /^(\-?\d+(?:\.\d+)?)[+\-÷×]$/;
 /** second number can never be negative, as the interface should not allow it */
-const SECOND_NUM_REGEX = /^\-?\d+\.?\d+[+|\-|÷|×](\d+\.?\d+)$/;
+const SECOND_NUM_REGEX = /^\-?\d+(?:\.\d+)?[+\-÷×](\-?\d+(?:\.\d+)?)$/;
 Object.freeze(FIRST_NUM_REGEX);
 Object.freeze(SECOND_NUM_REGEX);
 
