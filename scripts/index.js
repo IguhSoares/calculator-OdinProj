@@ -1,4 +1,4 @@
-import { calculate, writeToDisplay, getNumber } from './calculator';
+import { calculate, writeToDisplay, getNumber } from './calculator.js';
 
 const display = document.getElementById('display');
 
