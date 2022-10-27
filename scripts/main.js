@@ -46,16 +46,16 @@ const backspace = () => {
 const addPoint = () => {
   const displayText = display.innerText;
   let re1 = /\.\d*$/;
-  const re2 = /[+|\-|×|÷]\d+\.$/;
+  const re2 = /[+\-×÷]\d+\.$/;
   if (!re1.test(displayText) && !re2.test(displayText)) {
-    const regex = /^.+[+|\-|×|÷]$/;
+    const regex = /^.+[+\-×÷]$/;
     display.innerText +=
       displayText === '' || regex.test(displayText) ? '0.' : '.';
   }
 };
 const equalsTo = () => {
   const displayText = display.innerText;
-  if (/[+|\-|×|÷]$/.test(displayText)) backspace();
+  if (/[+\-×÷]$/.test(displayText)) backspace();
   else {
     const secondNum = getNumber(display, 'second');
     if (secondNum) {
@@ -100,7 +100,7 @@ const initOperators = () => {
       if (isOperator(displayText.at(-1))) updateOperator(oprt);
       else if (displayText === '' && oprt === '-') printToDisplay(oprt);
       else {
-        const match = displayText.match(/^(\-?\d+$|\d+\.?\d+$)/);
+        const match = displayText.match(/^(\-?\d+(?:\.\d+)?)$/);
         if (match) {
           Buffer.add(match[0]);
           Buffer.add(oprt);
