@@ -3,7 +3,7 @@ import { calculate, writeToDisplay, getNumber } from './calculator.js';
 
 const display = document.getElementById('display');
 
-const isOperator = val => ['+', '-', '*', '/'].includes(val);
+const isOperator = val => ['+', '-', '×', '÷'].includes(val);
 
 const printToDisplay = val => {
   if (display.innerText.length >= 20) throw 'Max limit reached';
@@ -11,10 +11,17 @@ const printToDisplay = val => {
   if (!itIsOperator || (itIsOperator && val === '-')) display.innerText += val;
 };
 
-const updateOperator = oprt => {
+const updateOperator = val => {
   const displayText = display.innerText;
+  const oprt = {
+    '+': '+',
+    '-': '-',
+    '*': '×',
+    '/': '÷',
+  };
+  console.log(isOperator(displayText.at(-1)));
   if (isOperator(displayText.at(-1))) {
-    display.innerText = displayText.slice(0, -1) + oprt;
+    display.innerText = displayText.slice(0, -1) + oprt[val];
   }
 };
 
@@ -67,10 +74,26 @@ const initPointKey = () => {
   document.querySelector('.point').addEventListener('click', addPoint);
 };
 
+const initOperators = () => {
+  document.querySelectorAll('#operators .key').forEach(k => {
+    k.addEventListener('click', e => {
+      const displayText = display.innerText;
+      console.log(displayText);
+      const operator = e.target.getAttribute('value');
+      if (isOperator(displayText.at(-1))) updateOperator(operator);
+    });
+  });
+};
+
+const initEqualsKey = () => {
+  document.getElementById('equal-sign').addEventListener('click', equalsTo);
+};
+
 const start = () => {
   initNumericKeys();
   initBackspace();
   initPointKey();
+  initOperators();
 };
 
 start();
