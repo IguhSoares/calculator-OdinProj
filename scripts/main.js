@@ -3,6 +3,7 @@ import { calculate, parseResult, getNumber } from './calculator.js';
 import Buffer from './buffer.js';
 
 const display = document.getElementById('display');
+Object.freeze(display);
 
 const isOperator = val => /[+\-×÷]/.test(val);
 
