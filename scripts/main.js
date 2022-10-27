@@ -17,7 +17,8 @@ const printToDisplay = val => {
     (displayText === '' && val === '-') ||
     /\d+$/.test(displayText)
   ) {
-    display.innerText += val;
+    if (displayText === '0') display.innerText = val;
+    else display.innerText += val;
   }
 };
 
@@ -41,6 +42,7 @@ const updateOperator = val => {
 const backspace = () => {
   const displayText = display.innerText;
   display.innerText = displayText.slice(0, -1);
+  if (display.innerText === '') display.innerText = '0';
 };
 
 const addPoint = () => {
@@ -49,8 +51,7 @@ const addPoint = () => {
   const re2 = /[+\-×÷]\d+\.$/;
   if (!re1.test(displayText) && !re2.test(displayText)) {
     const regex = /^.+[+\-×÷]$/;
-    display.innerText +=
-      displayText === '' || regex.test(displayText) ? '0.' : '.';
+    display.innerText += regex.test(displayText) ? '0.' : '.';
   }
 };
 const equalsTo = () => {
@@ -98,8 +99,9 @@ const initOperators = () => {
       const displayText = display.innerText;
       const oprt = e.target.getAttribute('value');
       if (isOperator(displayText.at(-1))) updateOperator(oprt);
-      else if (displayText === '' && oprt === '-') printToDisplay(oprt);
-      else {
+      else if (displayText === '0' && oprt === '-') {
+        printToDisplay(oprt);
+      } else if (displayText !== '0') {
         const match = displayText.match(/^(\-?\d+(?:\.\d+)?)$/);
         if (match) {
           Buffer.add(match[0]);
