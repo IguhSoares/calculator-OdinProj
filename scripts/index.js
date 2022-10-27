@@ -12,9 +12,16 @@ const isFloat = n => n % 1 !== 0;
 const isOperator = val => ['+', '-', '*', '/'].includes(val);
 
 const printToDisplay = val => {
-  if (display.innerText.length >= 20) throw 'Max limit reached';
+  const displayText = display.innerText;
+  if (displayText.length >= 20) throw 'Max limit reached';
   const itIsOperator = isOperator(val);
-  if (!itIsOperator || (itIsOperator && val === '-')) display.innerText += val;
+  if (
+    !itIsOperator ||
+    (displayText === '' && val === '-') ||
+    /\d+$/.test(displayText)
+  ) {
+    display.innerText += val;
+  }
 };
 
 const updateOperator = oprt => {
