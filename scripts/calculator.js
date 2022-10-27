@@ -19,8 +19,8 @@ const writeToDisplay = (display, result, op = null) => {
 };
 
 const addToBuffer = (value, type = 'number') => {
-  if (type === 'number') buffer.num = Number(value);
-  else if (type === 'operator') buffer.operator = value;
+  if (typeof Number(value) === 'number') buffer.num = Number(value);
+  else if (['+', '-', '*', '/'].includes(value)) buffer.operator = value;
 };
 
 /** if an operator is passed, the result is saved to the buffer

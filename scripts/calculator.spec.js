@@ -97,7 +97,7 @@ describe('addToBuffer method', () => {
   });
 
   it('should set buffer.operator', () => {
-    addToBuffer('*', 'operator');
+    addToBuffer('*');
     expect(buffer.operator).toBe('*');
   });
 });
