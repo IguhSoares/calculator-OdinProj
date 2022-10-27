@@ -1,10 +1,12 @@
 import msg from './messages.js';
-import { calculate, writeToDisplay, getNumber } from './calculator.js';
+import { calculate, parseResult, getNumber } from './calculator.js';
 import Buffer from './buffer.js';
 
 const display = document.getElementById('display');
 
 const isOperator = val => ['+', '-', '×', '÷'].includes(val);
+
+const clearDisplay = () => (display.innerText = '');
 
 const printToDisplay = val => {
   const displayText = display.innerText;
@@ -58,7 +60,8 @@ const equalsTo = () => {
     const secondNum = getNumber(display, 'second');
     if (secondNum) {
       const result = calculate(secondNum);
-      writeToDisplay(display, result);
+      clearDisplay();
+      printToDisplay(parseResult(result));
     }
   }
 };
@@ -113,6 +116,7 @@ const start = () => {
   initBackspace();
   initPointKey();
   initOperators();
+  initEqualsKey();
 };
 
 start();
