@@ -10,30 +10,35 @@ const Buffer = (function () {
 
   const validateOperands = (x, y) => {
     const validator = {
-      '+': validateSize(y),
-      '-': validateSize(y),
+      '+': (_, y) => validateSize(y),
+      '-': (_, y) => validateSize(y),
       '*': (x, y) => getNumberOfDigits(x) + getNumberOfDigits(y) < 22,
-      '/': (x, y) => getNumberOfDigits(y) - getNumberOfDigits(x) < 6,
+      '/': (x, y) => getNumberOfDigits(y) - getNumberOfDigits(x) < 5,
     };
-    return validator[op];
+    return validator[op](x, y);
   };
+
+  const roundFloat = n => parseFloat(n.toFixed(14));
 
   return {
     calc(x) {
       const operations = {
-        '+': n => this.num + Number(n),
-        '-': n => this.num - Number(n),
-        '*': n => this.num * Number(n),
-        '/': n => this.num / Number(n),
+        '+': n => this.num + n,
+        '-': n => this.num - n,
+        '*': n => this.num * n,
+        '/': n => this.num / n,
       };
 
       if (op === '/' && x === 0) throw new Error('Division by zero attempt');
 
-      if (!validateOperands(number, x)) throw new Error('Number too large');
+      let n = Number(x);
+      if (isFloat(n)) n = roundFloat(n);
+
+      if (!validateOperands(number, n)) throw new Error('Number too large');
 
       let result = operations[op](x);
       if (isFloat(result)) {
-        result = parseFloat(result.toFixed(15));
+        result = roundFloat(result);
       }
       return result;
     },
@@ -69,11 +74,13 @@ const Buffer = (function () {
     },
 
     add(value) {
-      if (!isNaN(Number(value))) {
-        if (!validateSize(value)) {
+      let n = Number(value);
+      if (!isNaN(n)) {
+        if (isFloat(n)) n = roundFloat(n);
+        if (!validateSize(n)) {
           throw new Error('Number too large');
         }
-        this.num = Number(value);
+        this.num = n;
       } else if (['+', '-', '*', '/'].includes(value)) this.operator = value;
     },
   };
