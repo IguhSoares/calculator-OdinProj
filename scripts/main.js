@@ -84,7 +84,7 @@ const initNumericKeys = () => {
 
 const initBackspace = () => {
   document
-    .querySelector('.key[value="bksp"]')
+    .querySelector('.key[value="Backspace"]')
     .addEventListener('click', backspace);
 };
 
@@ -143,8 +143,6 @@ const initKeyboardSupport = () => {
 
       if (e.key === ' ' || e.key === '=') {
         triggerClick('=');
-      } else if (e.key === 'Backspace') {
-        triggerClick('bksp');
       } else {
         triggerClick(e.key);
       }
