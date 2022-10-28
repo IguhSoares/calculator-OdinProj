@@ -12,12 +12,8 @@ const clearDisplay = () => (display.innerText = '0');
 const printToDisplay = val => {
   const displayText = display.innerText;
   if (displayText.length >= 20) throw 'Max limit reached';
-  const itIsOperator = isOperator(val);
-  if (
-    !itIsOperator ||
-    (displayText === '' && val === '-') ||
-    /\d+$/.test(displayText)
-  ) {
+
+  if (!isOperator(val) || val === '-' || /\d+$/.test(displayText)) {
     if (displayText === '0') display.innerText = val;
     else display.innerText += val;
   }
@@ -48,6 +44,7 @@ const backspace = () => {
 
 const addPoint = () => {
   const displayText = display.innerText;
+
   let re1 = /\.\d*$/;
   const re2 = /[+\-×÷]\d+\.$/;
   if (!re1.test(displayText) && !re2.test(displayText)) {
@@ -55,16 +52,17 @@ const addPoint = () => {
     display.innerText += regex.test(displayText) ? '0.' : '.';
   }
 };
+
 const equalsTo = () => {
   const displayText = display.innerText;
+
   if (/[+\-×÷]$/.test(displayText)) backspace();
   else {
     const secondNum = getNumber(display, 'second');
     if (secondNum) {
       try {
-        const result = calculate(secondNum);
         clearDisplay();
-        printToDisplay(parseResult(result));
+        printToDisplay(parseResult(calculate(secondNum)));
       } catch (error) {
         msg.display(error);
       }
@@ -106,6 +104,7 @@ const initOperators = () => {
       } else if (displayText !== '0') {
         const match = displayText.match(/^(\-?\d+(?:\.\d+)?)$/);
         if (match) {
+          /** match the number in the display */
           try {
             Buffer.add(match[0]);
             Buffer.add(oprt);
