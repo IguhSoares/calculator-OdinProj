@@ -29,7 +29,8 @@ const Buffer = (function () {
         '/': n => this.num / n,
       };
 
-      if (op === '/' && x === 0) throw new Error('Division by zero attempt');
+      if (this.operator === '/' && x === 0)
+        throw new Error('Division by zero attempt');
 
       let n = Number(x);
       if (isFloat(n)) n = roundFloat(n);
