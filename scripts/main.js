@@ -102,16 +102,25 @@ const initOperators = () => {
       else if (displayText === '0' && oprt === '-') {
         printToDisplay(oprt);
       } else if (displayText !== '0') {
-        const match = displayText.match(/^(\-?\d+(?:\.\d+)?)$/);
-        if (match) {
-          /** match the number in the display */
-          try {
+        try {
+          let match = displayText.match(/^(\-?\d+(?:\.\d+)?)$/);
+          if (match) {
+            /** match the number in the display */
             Buffer.add(match[0]);
             Buffer.add(oprt);
-            printToDisplay(getOperator(oprt));
-          } catch (error) {
-            msg.display(error);
+          } else {
+            match = displayText.match(
+              /^(\-?\d+(?:\.\d+)?)[+\-×÷](\-?\d+(?:\.\d+)?)$/
+            );
+            if (match) {
+              const x = getNumber(display, 'second');
+              clearDisplay();
+              printToDisplay(calculate(x, oprt));
+            }
           }
+          printToDisplay(getOperator(oprt));
+        } catch (error) {
+          msg.display(error);
         }
       }
     });
